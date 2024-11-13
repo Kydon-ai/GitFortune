@@ -233,7 +233,45 @@ AAAA
 
 ## 5.7 标签操作
 
-AAAA
+标签是为了给某个提交打上特殊标注，相当于别名。可以用于纪念，也可以用这个标签代表该次提交的唯一标记。
+
+-  git tag \<tagName\> [hashValue]
+
+给当前分支打上一个 tag。如果附加提交哈希，那么就是为指定提交打上一个标签
+
+-  git tag -a \<tagName\> [hashValue] -m \<附加消息\>
+
+为当前分支打上一个附加消息的标签，称为附加标签。如果附加提交哈希，那么就是为指定提交打上一个附加标签
+
+-  git tag [-l <通配规则>]
+
+显示所有的标签，可通过`-l` 参数使用通配符进行查询
+
+-  git show [tagName]
+
+展示指定标签的详细信息。如果单独使用`git show`则展示最新一次提交的详细信息。
+
+-  git tag -d \<tagName\>
+
+删除本地指定标签
+
+-  git push \<host\> \<tagName\>
+
+因为 push 代码不会同时将 tag 提交上去，所以需要额外将某个标签推送到远程仓库。
+
+-  git push \<host\> --tags
+
+将所有 tag 推送到远程仓库
+
+-  git push \<host\> :refs/tags/\<tagName\>
+
+将指定的标签从远程仓库进行删除，也可以使用
+
+`git push origin --delete <tagName>`
+
+-  git checkout -b \<newBranchName\> \<tagName\>
+
+根据标签，将指定标签的提交进行检出，并创建一个新的分支
 
 # 六、参考链接
 
@@ -246,3 +284,7 @@ AAAA
 4.[Git 中文件的 4 种状态\_git 中文件状态-CSDN 博客](https://blog.csdn.net/alan418/article/details/106629307)
 
 5.[Git 分支和文件名重名的时候如何切换分支\_git 新旧版本文件名重复-CSDN 博客](https://blog.csdn.net/weixin_43889618/article/details/119916947)
+
+6.[Git 基础 - git tag 一文真正的搞懂 git 标签的使用-CSDN 博客](https://blog.csdn.net/qq_39505245/article/details/124705850)
+
+7.[git 删除远程的 tag_git 删除远程 tag-CSDN 博客](https://blog.csdn.net/chuyouyinghe/article/details/114184913)
