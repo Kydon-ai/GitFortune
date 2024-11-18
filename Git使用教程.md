@@ -20,7 +20,13 @@ Git 是一款分布式的、可供多人开发的版本控制软件，在多人�
 
 ## 2.1 原理图示与运行流程
 
-![](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015120901.png)
+![](https://github.com/theOnlyUnique/GitFortune/blob/master/img/git工作流程.png)
+
+
+
+
+
+
 
 ## 2.2 概念补充
 
@@ -33,7 +39,9 @@ Git 是一款分布式的、可供多人开发的版本控制软件，在多人�
 
 -  Git 概念当中的文件状态
 
-![CSDN文章](https://i-blog.csdnimg.cn/blog_migrate/f12a0a47fc6fa0adb800e7a250813c93.png)
+![文章](https://github.com/theOnlyUnique/GitFortune/blob/master/img/文件跟踪状态.png)
+
+
 
 **Untracked**: 未跟踪, 此文件在文件夹中, 但并没有加入到 git 库, 不参与版本控制. 通过 git add 状态变为 Staged.
 
