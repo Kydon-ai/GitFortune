@@ -55,19 +55,78 @@ Git 是一款分布式的、可供多人开发的版本控制软件，在多人�
 
 掌握这部分可以解决项目开发下 90%的场景遇到的问题
 
+```
+// 初始化项目
+git init
+// 拉取项目
+git clone https:www.github.com/xxx.git
+// 给远程仓库取别名，做映射便于使用
+git remote add origin clone https:www.github.com/xxx.git
+// 修改主机名映射信息
+git remote set-url origin clone https:www.github.com/xxx.git
+// 将所有文件添加到暂存区
+git add .
+// 将当前分支复制一份当做xxx分支，并切换过去
+git checkout -b xxx
+// 跳过ESLint校验提交代码
+git commit --no-verify -m "xxx"
+// 将A分支推送到远程仓库的B分支，并且建立联系
+git push -u origin A:B
+// 强制回退分支到指定hash码
+git reset --hard 012789abcd012789abcd012789abcd012789abcd
+// 查看本地所有tag
+git tag
+```
+
+
+
 # 四、场景举例
 
-## 4.1A
+## 4.1第一次使用
 
-AAAA
+首先必须添加个人信息
 
-## 4.2B
+```
+git config --global user.name "Liu Qidong"
+git config --global user.email "254****216@qq.com"
+```
 
-AAAA
+## 4.2将本地开发了很久的项目推送到新仓库
 
-## 4.3C
+一些常用步骤
 
-AAAA
+```
+git init
+git remote add origin "https:remote-url"
+// 如果已经存在相同的主机名，执行以下命令替换
+git remote set-url origin "https:remote-url"
+// 绑定上下游分支,后续可直接用 git push复刻本次提交
+git push -u origin xx分支名
+```
+
+## 4.3回退分支
+
+适用于强制回退
+
+```
+// 查看需要回退的提交的hash值，假如为
+// 012789abcd012789abcd012789abcd012789abcd
+git log
+git reset --hard 012789abcd012789abcd012789abcd012789abcd
+// 这样所有记录将回到这个节点，但是回退中间的提交都会丢失
+// 只想看看可以使用
+git checkout 012789abcd012789abcd012789abcd012789abcd
+```
+
+## 4.4正常提交
+
+```
+git add .
+git commit -m "554545"
+git push origin A分支名:远程B分支名
+```
+
+
 
 # 五、Git 指令大全
 
