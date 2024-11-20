@@ -69,9 +69,9 @@ git init
 // 拉取项目
 git clone https:www.github.com/xxx.git
 // 给远程仓库取别名，做映射便于使用
-git remote add origin clone https:www.github.com/xxx.git
+git remote add origin https:www.github.com/xxx.git
 // 修改主机名映射信息
-git remote set-url origin clone https:www.github.com/xxx.git
+git remote set-url origin https:www.github.com/xxx.git
 // 将所有文件添加到暂存区
 git add .
 // 将当前分支复制一份当做xxx分支，并切换过去
