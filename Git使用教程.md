@@ -264,9 +264,17 @@ git push origin A分支名:远程B分支名
 
 创建一个本地分支，但是不切换
 
+* git branch --contains <提交哈希>
+
+查询某次提交包含在哪些分支里面，可以包含远程追踪分支，可以配合`git log --all --grep=<提交哈希>`使用
+
 -  git branch -d \<branchName\>
 
 删除一个本地分支
+
+* git log
+
+查看当前分支的所有提交信息详情，加上`--all`参数则是查看所有分支的提交信息详情
 
 -  git checkout -
 
@@ -281,6 +289,21 @@ git push origin A分支名:远程B分支名
 删除远程跟踪分支，另一种写法是`git branch -dr <origin/branch>`
 
 -  git cherry-pick \<hashValue\>
+
+将某次提交值为hashValue时的代码状态，合并到当前的分支上，有冲突就需要解决
+
+-  git rebase targetBranch workBranch
+
+当多人开发的时候，总是基于某个版本分别拉取代码进行开发，所以合并代码的时候大家的版本只会有共同的祖先，但是却又很多冲突，这个指令会计算`targetBranch `和`workBranch`两个分支的共同组件，将`workBranch`的更改追加到`targetBranch `末尾并生成新的log
+
+相当于`git checkout workBranch `加上`git rebase targetBranch ` 
+
+其中`merge`和`rebase`作用差不多，但是前者按照时间线排列，后者按照指令操作进行记录合并。前者方便回溯，后者合并与审查更简洁
+
+> 中途遇到冲突，合并完后会不在任何分支上，可以使用git rebase --continue继续操作
+> 否则使用git rebase --abort放弃本次操作
+
+
 
 ## 5.6 远程仓库指令
 
@@ -355,3 +378,7 @@ git push origin A分支名:远程B分支名
 6.[Git 基础 - git tag 一文真正的搞懂 git 标签的使用-CSDN 博客](https://blog.csdn.net/qq_39505245/article/details/124705850)
 
 7.[git 删除远程的 tag_git 删除远程 tag-CSDN 博客](https://blog.csdn.net/chuyouyinghe/article/details/114184913)
+
+8.[git rebase详解（图解+最简单示例，一次就懂）-CSDN博客](https://blog.csdn.net/weixin_42310154/article/details/119004977)
+
+9.[Git：Rebase和Merge之间的区别，看完这篇文章你就懂了！-CSDN博客](https://blog.csdn.net/xishining/article/details/115152823)
