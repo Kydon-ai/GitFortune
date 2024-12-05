@@ -363,7 +363,34 @@ git push origin A分支名:远程B分支名
 
 根据标签，将指定标签的提交进行检出，并创建一个新的分支
 
-# 六、参考链接
+
+
+# 六、提交类型
+
+一个规范的 Git Commit 消息通常包含三个部分：**Header**、**Body** 和 **Footer**，通常情况下只有`Header`是必须的
+
+**Header** 部分包括三个字段：**type**（必需）、**scope**（可选）和 **subject**（必需），通常不写**scope**。常见的`type`列出如下：
+
+| 序号 |   type   |          应用场景          |                 备注                  |
+| :--: | :------: | :------------------------: | :-----------------------------------: |
+|  1   |   feat   |       添加了新的功能       |                                       |
+|  2   |   fix    |       修复了某个bug        |                                       |
+|  3   |   docs   |      只更改了文档部分      |                                       |
+|  4   |  styles  |       修改了样式部分       |   不影响代码逻辑，即不影响代码逻辑    |
+|  5   | refactor |      对功能进行了重构      | 既不是新增功能也不是修复bug的代码更改 |
+|  6   |   perf   |          性能优化          |     比如图片加载，轻微的逻辑优化      |
+|  7   |   test   |        添加单元测试        |                                       |
+|  8   |  chore   |            杂项            |     不知道你写的是啥类型就用这个      |
+|  9   |  build   | 构建系统或外部依赖项的变更 |         即工具链和依赖的变更          |
+|  10  |  revert  |            回滚            |                                       |
+
+> 示例：fix：修复了平台性能过强的bug
+>
+> 中英文冒号都行，建议中文，因为更宽更好看，后面打文字不用再切输入法。
+
+
+
+# 七、参考链接
 
 1.[图解 Git | 菜鸟教程 (runoob.com)](https://www.runoob.com/w3cnote/git-graphical.html)
 
@@ -382,3 +409,5 @@ git push origin A分支名:远程B分支名
 8.[git rebase详解（图解+最简单示例，一次就懂）-CSDN博客](https://blog.csdn.net/weixin_42310154/article/details/119004977)
 
 9.[Git：Rebase和Merge之间的区别，看完这篇文章你就懂了！-CSDN博客](https://blog.csdn.net/xishining/article/details/115152823)
+
+10.[git 代码提交规范，feat，fix，chore都是什么意思?_git chore-CSDN博客](https://blog.csdn.net/chenyajundd/article/details/139322838)
