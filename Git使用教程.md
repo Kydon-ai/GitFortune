@@ -204,7 +204,7 @@ git push origin A分支名:远程B分支名
 
 -  git pull origin \<remoteBranch\>:\<localBranch\>
 
-相当于执行了`git pull `外加`git merge`,当远程和本地同名时，可以缩写为`git pull origin remoteBranch`
+相当于执行了`git fetch `外加`git merge`,当远程和本地同名时，可以缩写为`git pull origin remoteBranch`
 
 -  git push -u origin \<branchName\>
 
