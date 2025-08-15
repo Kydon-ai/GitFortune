@@ -388,9 +388,22 @@ git push origin A分支名:远程B分支名
 >
 > 中英文冒号都行，建议中文，因为更宽更好看，后面打文字不用再切输入法。
 
+# 七、Git LFS
+为了将大型资源和文本资源解绑，Github和GitLab的发明者专门提出了Git LFS来针对Git 在处理大文件时的性能瓶颈问题，其专门使用服务器来存储大型资源，支持断点续传，加快了git的操作速度。现在git lfs能够无痛切换，上传到github的图片，升级到lfs依旧可原路径访问。
+* git lfs install
+在本机的git上安装lfs，系统级别只需要全局安装一次，当然可以每个仓库都执行一遍
+* git lfs version
+输出lfs的版本信息，未安装则会报错
+* git lfs track "*.psd"
+指定追踪的大文件类型，或者采用.gitattributes进行声明。后续会对识别到的大文件类型，自动替换为存储一个指针，在push的时候，真实的资源会被上传到默认的lfs服务器。如果不指定类型，则会输出已添加的大文件识别类型
+* git lfs untrack "*.psd"
+上述操作的反向操作
+* git lfs ls-files
+查看工作区的所有lfs文件
+* git lfs status
+查看当前变更的lfs文件
 
-
-# 七、参考链接
+# 八、参考链接
 
 1.[图解 Git | 菜鸟教程 (runoob.com)](https://www.runoob.com/w3cnote/git-graphical.html)
 
