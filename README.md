@@ -66,9 +66,9 @@ git add .
 git checkout -b xxx
 // 跳过ESLint校验提交代码（一般配置好了.husky不需要跳过，会自动处理好）
 git commit --no-verify -m "xxx"
-// 将A分支推送到远程仓库的B分支，并且建立联系
+// 将本地A分支推送到远程仓库的B分支，并且建立联系
 git push -u origin A:B
-// 强制回退分支到指定hash码(可通过git reflog的hash进行回退，但git log已经无法查看指针之后的位置)
+// 强制回退分支到指定hash码(可通过git reflog的hash在24h进行回退，但git log无法查看指针之后的位置。谨慎对待！)
 git reset --hard 012789abcd012789abcd012789abcd012789abcd
 // 查看本地所有tag
 git tag
@@ -196,7 +196,9 @@ git push origin A分支名:远程B分支名
 
 -  git pull origin \<remoteBranch\>:\<localBranch\>
 
-相当于执行了`git fetch `外加`git merge`,当远程和本地同名时，可以缩写为`git pull origin remoteBranch`
+相当于执行了`git fetch `外加`git merge`,当远程和本地同名时，可以缩写为`git pull origin remoteBranch`<br>
+
+> 其可能会产生合并提交，推荐使用`git pull --rebase`保持线性历史
 
 -  git push origin \<localBranchName\>:\<remoteBranchName\>:
 
@@ -213,6 +215,7 @@ git push origin A分支名:远程B分支名
 -  git checkout \<branchName\>
 
 将当前分支切换到 `branchName`,可以使用`-b`参数应对该分支不存在的情况，以此新建一个分支
+> 现在语义化的分支切换指令为switch
 
 -  git checkout [-- \<fileName\>]
 
