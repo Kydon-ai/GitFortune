@@ -18,11 +18,6 @@ Git 是一款分布式的、可供多人开发的版本控制软件，在多人�
 ![](https://github.com/theOnlyUnique/GitFortune/blob/master/img/git工作流程.png)
 
 
-
-
-
-
-
 ## 2.2 概念补充
 
 -  Workspace：工作区，就是你写代码的 IDE 所看见的区域
@@ -35,8 +30,6 @@ Git 是一款分布式的、可供多人开发的版本控制软件，在多人�
 -  Git 概念当中的文件状态
 
 ![文章](https://github.com/theOnlyUnique/GitFortune/blob/master/img/文件跟踪状态.png)
-
-
 
 **Untracked**: 未跟踪, 此文件在文件夹中, 但并没有加入到 git 库, 不参与版本控制. 通过 git add 状态变为 Staged.
 
@@ -137,32 +130,31 @@ git push origin A分支名:远程B分支名
 
 -  git init
 
-当你想将自己开发的项目结合上 git 进行版本控制时，可以使用该指令在当前目录创建一个本地仓库以进行版本控制。
-
+> 当你想将自己开发的项目结合上 git 进行版本控制时，可以使用该指令在当前目录创建一个本地仓库以进行版本控制。
 此外，可以随便跟一个 name，代表在当前目录创建一个 name 文件夹，再执行`git init`
 
 -  git clone \<url\>
 
--b branch_name 指定远程分支克隆
---depth n 只获取最新的n次提交记录,一般填写为1（Shallow Clone）
---recurse-submodules 通过.gitmodules文件一次性将子模块下载
---filter=blob:none 按需加载git数据流
+`-b branch_name` 指定远程分支克隆
+`--depth n` 只获取最新的n次提交记录,一般填写为1（Shallow Clone）
+`--recurse-submodules` 通过.gitmodules文件一次性将子模块下载
+`--filter=blob:none` 按需加载git数据流
 
-当你想获取别人的代码到本地时，可以使用此指令
+> 当你想获取别人的代码到本地时，可以使用此指令
 
 ## 5.2Git 配置
 
 -  git config --global user.name <"你的昵称，用于显示提交信息">
 
-必填项，配置你的个人信息，不必要实名，显示你的昵称信息，用于提交到远程仓库
+> 必填项，配置你的个人信息，不必要实名，显示你的昵称信息，用于提交到远程仓库
 
 -  git config --global user.email <"你的邮箱">
 
-必填项，配置你的邮箱，方便他人联系你
+> 必填项，配置你的邮箱，方便他人联系你
 
 -  git config --list
 
-查看当前 git 的配置
+> 查看当前 git 的配置
 
 -  git config -e
 
@@ -194,7 +186,7 @@ git push origin A分支名:远程B分支名
 
 ## 5.3 项目拉取与推送
 
--  git fetch origin \<branchName\>
+-  git fetch \<origin\> \<branchName\>
 
 将远程仓库的项目，拉取到本地远程跟踪分支上，该远程跟踪分支表现为`origin/branchName`，相当于一个只读的本地分支。
 
@@ -206,13 +198,11 @@ git push origin A分支名:远程B分支名
 
 相当于执行了`git fetch `外加`git merge`,当远程和本地同名时，可以缩写为`git pull origin remoteBranch`
 
--  git push -u origin \<branchName\>
+-  git push origin \<localBranchName\>:\<remoteBranchName\>:
 
-将本地的 branchName 分支设置为`origin/branchName`分支的上游
+-u 将本地的 `localBranchName` 分支设置为`origin/remoteBranchName`分支的上游,后续可以直接在该分支上使用`git push`推送
 
--  git push
-
-假如当前分支名为 a，当 a 分支创建了上游，那么在 a 分支执行该命令，会自动将 a 分支推送到远程仓库的上游分支，否则其会提示还未创建上游分支
+> 注意push和pull的分支书写顺序是相反的！
 
 ## 5.4 文件增添与撤销
 
@@ -226,19 +216,15 @@ git push origin A分支名:远程B分支名
 
 -  git checkout [-- \<fileName\>]
 
-将该文件的工作区内容使用缓存区中的内容进行替换，即丢弃当前文件更改
+将该文件的工作区内容使用缓存区中的内容进行替换，即丢弃当前文件更改。在不和分支名冲突的情况下，`--`可以省略。
 
-在不和分支名冲突的情况下，`--`可以省略。
-
-使用`git checkout`可以全部撤销
+使用`git checkout`可以全部撤销未暂存（`git add`）的文件
 
 -  git reset
 
-将文件都撤回到上次 commit 时的状态
-
--  git reset --hard \<hashValue\>
-
-将文件都撤回到上次 commit 时哈希值为 hashValue 时的状态
+`--hard <hashValue>` 将文件都撤回到上次 commit 时哈希值为 hashValue 时的状态,能通过reflog撤销回退
+`--mixed`​ 默认模式，将文件都撤回到上次 commit 时的状态，执行后改动保存在工作区
+`--soft` 将文件都撤回到上次 commit 时的状态，执行后改动保存在暂存区
 
 -  git revert \<hashValue\>
 
@@ -246,35 +232,34 @@ git push origin A分支名:远程B分支名
 
 -  git stash
 
-将所有未 commit 的内容加入暂存区，独立放在一起
+`list` 查看所有的已有stash（贮藏区）
+`push` 默认选项，将当前未暂存的内容加入stash
+`pop` 退出一个最近的stash，但是可能需要解决冲突
+`drop` 在`pop`解决冲突后，调用此命令手动解决冲突
+`clear` 清除本地所有的stash
 
--  git stash pop
+> 将所有未 commit 的内容加入贮藏区，独立放在一起
 
-将所有缓存以合并的形式恢复到工作区，有冲突时需要手动解决
 
 ## 5.5 分支操作
 
 该部分请查看`文件增添与撤销`,补充一些特殊的指令
 
--  git branch -a
+-  git branch 
 
-查看本地所有的分支详情
-
+`-a` 查看本地所有的分支详情,也会列出本地存储的远程追踪分支
+`--contains <提交哈希>` 查询某次提交包含在哪些分支里面，可以包含远程追踪分支，可以配合`git log --all --grep=<提交哈希>`使用
 -  git branch \<branch-name\>
 
-创建一个本地分支，但是不切换
+`-d` 删除一个本地分支
 
-* git branch --contains <提交哈希>
+> 创建一个本地分支，默认不切换
 
-查询某次提交包含在哪些分支里面，可以包含远程追踪分支，可以配合`git log --all --grep=<提交哈希>`使用
 
--  git branch -d \<branchName\>
+- git log
 
-删除一个本地分支
-
-* git log
-
-查看当前分支的所有提交信息详情，加上`--all`参数则是查看所有分支的提交信息详情
+`--all` 查看所有分支的提交信息详情
+> 查看当前分支的所有提交信息详情
 
 -  git checkout -
 
@@ -286,7 +271,8 @@ git push origin A分支名:远程B分支名
 
 -  git push origin --delete \<branch-name\>
 
-删除远程跟踪分支，另一种写法是`git branch -dr <origin/branch>`
+另一种写法是`git branch -dr <origin/branch>`,但是这将只会删除本地远程追踪分支
+> 删除远程跟踪分支
 
 -  git cherry-pick \<hashValue\>
 
@@ -300,68 +286,39 @@ git push origin A分支名:远程B分支名
 
 其中`merge`和`rebase`作用差不多，但是前者按照时间线排列，后者按照指令操作进行记录合并。前者方便回溯，后者合并与审查更简洁
 
-> 中途遇到冲突，合并完后会不在任何分支上，可以使用git rebase --continue继续操作
-> 否则使用git rebase --abort放弃本次操作
+> 中途遇到冲突，合并完后会不在任何分支上，可以使用git rebase --continue继续操作。否则使用git rebase --abort放弃本次操作
 
 
 
 ## 5.6 远程仓库指令
 
--  git remote -v
+-  git remote 
 
-查看本地的主机配置信息，一般一个主机名会有一对`fetch`和`push`地址
-
--  git remote add \<host\> \<url\>
-
-对该项目的 host 绑定一个远程仓库地址，如果该主机已经绑定，则会失败。
-
-注意，一个项目可以绑定多个 host，即可以映射多个仓库
-
--  git remote set-url \<host\> \<newUrl\>
-
-将 host 对应的远程仓库地址进行修改
+`-v `查看本地的主机配置信息，一般一个主机名会有一对`fetch`和`push`地址
+`add <host> <url>` 对该项目的 host 绑定一个远程仓库地址，如果该主机已经绑定，则会失败。
+`set-url <host> <newUrl>` 将 host 对应的远程仓库地址进行修改
 
 ## 5.7 标签操作
 
 标签是为了给某个提交打上特殊标注，相当于别名。可以用于纪念，也可以用这个标签代表该次提交的唯一标记。
 
--  git tag \<tagName\> [hashValue]
+-  git tag 
 
-给当前分支打上一个 tag。如果附加提交哈希，那么就是为指定提交打上一个标签
+`<tagName> [hashValue] `给当前分支打上一个 tag。如果附加提交哈希，那么就是为指定提交打上一个标签
+`show [tagName]` 展示指定标签的详细信息。如果单独使用`git show`则展示最新一次提交的详细信息。
+`-a <tagName> [hashValue] -m <附加消息>` 为当前分支打上一个附加消息的标签，称为附加标签。如果附加提交哈希，那么就是为指定提交打上一个附加标签
+`[-l <通配规则>]` 不加参数限制会显示所有的标签，可通过`-l` 参数使用glob通配符进行匹配查询
+`-d <tagName>`  删除本地指定标签
 
--  git tag -a \<tagName\> [hashValue] -m \<附加消息\>
+-  git push 
 
-为当前分支打上一个附加消息的标签，称为附加标签。如果附加提交哈希，那么就是为指定提交打上一个附加标签
+`<host> <tagName>` 因为 push 代码不会同时将 tag 提交上去，所以需要额外将某个标签推送到远程仓库。
+`<host> --tags`  将所有 tag 推送到远程仓库
+`<host> --delete <tagName>` 将指定的标签从远程仓库进行删除，也可以使用
 
--  git tag [-l <通配规则>]
+-  git checkout 
 
-显示所有的标签，可通过`-l` 参数使用通配符进行查询
-
--  git show [tagName]
-
-展示指定标签的详细信息。如果单独使用`git show`则展示最新一次提交的详细信息。
-
--  git tag -d \<tagName\>
-
-删除本地指定标签
-
--  git push \<host\> \<tagName\>
-
-因为 push 代码不会同时将 tag 提交上去，所以需要额外将某个标签推送到远程仓库。
-
--  git push \<host\> --tags
-
-将所有 tag 推送到远程仓库
-
--  git push \<host\> :refs/tags/\<tagName\>
-
-将指定的标签从远程仓库进行删除，也可以使用
-
-`git push origin --delete <tagName>`
-
--  git checkout -b \<newBranchName\> \<tagName\>
-
-根据标签，将指定标签的提交进行检出，并创建一个新的分支
+`-b <newBranchName> <tagName> `根据标签，将指定标签的提交进行检出，并创建一个新的分支
 
 
 
@@ -406,6 +363,7 @@ git push origin A分支名:远程B分支名
 # 八、参考链接
 
 [置顶]-[Pro Git](https://bingohuang.gitbooks.io/progit2/content/)
+> 路由末尾添加zh_HANS-CN可查看中文版
 
 [置顶]-[Git 中文官网文档](https://git-scm.com/about)
 
