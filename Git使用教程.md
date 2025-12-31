@@ -326,7 +326,7 @@ git push origin A分支名:远程B分支名
 
 一个规范的 Git Commit 消息通常包含三个部分：**Header**、**Body** 和 **Footer**，通常情况下只有`Header`是必须的
 
-**Header** 部分包括三个字段：**type**（必需）、**scope**（可选）和 **subject**（必需），通常不写**scope**。常见的`type`列出如下：
+**Header** 部分包括三个字段：**type**（必需）、**scope**（可选）和 **subject**（必需），通常不写代表影响范围的**scope**。常见的`type`列出如下：
 
 | 序号 |   type   |          应用场景          |                 备注                  |
 | :--: | :------: | :------------------------: | :-----------------------------------: |
@@ -340,6 +340,10 @@ git push origin A分支名:远程B分支名
 |  8   |  chore   |            杂项            |     不知道你写的是啥类型就用这个      |
 |  9   |  build   | 构建系统或外部依赖项的变更 |         即工具链和依赖的变更          |
 |  10  |  revert  |            回滚            |                                       |
+|  10  |  ci  |            修改ci配置文件            |                                       |
+|  10  |  env  |            修改环境变量文件            |                                       |
+|  10  |  typo  |            错别字修改            |        用的比较少，但可以使用          |
+
 
 > 示例：fix：修复了平台性能过强的bug
 >
@@ -359,11 +363,11 @@ git push origin A分支名:远程B分支名
 查看工作区的所有lfs文件
 * git lfs status
 查看当前变更的lfs文件
-
+* git lfs migrate import --include="\*.psd,\*.mp4,\*.zip,\*.pdf,\*.jar" --everything
+将提交普通Git的大文件历史重写
 # 八、参考链接
 
 [置顶]-[Pro Git](https://bingohuang.gitbooks.io/progit2/content/)
-> 路由末尾添加zh_HANS-CN可查看中文版
 
 [置顶]-[Git 中文官网文档](https://git-scm.com/about)
 
