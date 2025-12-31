@@ -135,10 +135,10 @@ git push origin A分支名:远程B分支名
 
 -  git clone \<url\>
 
-`-b branch_name` 指定远程分支克隆
-`--depth n` 只获取最新的n次提交记录,一般填写为1（Shallow Clone）
-`--recurse-submodules` 通过.gitmodules文件一次性将子模块下载
-`--filter=blob:none` 按需加载git数据流
+`-b branch_name` 指定远程分支克隆<br>
+`--depth n` 只获取最新的n次提交记录,一般填写为1（Shallow Clone）<br>
+`--recurse-submodules` 通过.gitmodules文件一次性将子模块下载<br>
+`--filter=blob:none` 按需加载git数据流<br>
 
 > 当你想获取别人的代码到本地时，可以使用此指令
 
@@ -222,9 +222,9 @@ git push origin A分支名:远程B分支名
 
 -  git reset
 
-`--hard <hashValue>` 将文件都撤回到上次 commit 时哈希值为 hashValue 时的状态,能通过reflog撤销回退
-`--mixed`​ 默认模式，将文件都撤回到上次 commit 时的状态，执行后改动保存在工作区
-`--soft` 将文件都撤回到上次 commit 时的状态，执行后改动保存在暂存区
+`--hard <hashValue>` 将文件都撤回到上次 commit 时哈希值为 hashValue 时的状态,能通过reflog撤销回退<br>
+`--mixed`​ 默认模式，将文件都撤回到上次 commit 时的状态，执行后改动保存在工作区<br>
+`--soft` 将文件都撤回到上次 commit 时的状态，执行后改动保存在暂存区<br>
 
 -  git revert \<hashValue\>
 
@@ -232,11 +232,11 @@ git push origin A分支名:远程B分支名
 
 -  git stash
 
-`list` 查看所有的已有stash（贮藏区）
-`push` 默认选项，将当前未暂存的内容加入stash
-`pop` 退出一个最近的stash，但是可能需要解决冲突
-`drop` 在`pop`解决冲突后，调用此命令手动解决冲突
-`clear` 清除本地所有的stash
+`list` 查看所有的已有stash（贮藏区）<br>
+`push` 默认选项，将当前未暂存的内容加入stash<br>
+`pop` 退出一个最近的stash，但是可能需要解决冲突<br>
+`drop` 在`pop`解决冲突后，调用此命令手动解决冲突<br>
+`clear` 清除本地所有的stash<br>
 
 > 将所有未 commit 的内容加入贮藏区，独立放在一起
 
@@ -247,8 +247,8 @@ git push origin A分支名:远程B分支名
 
 -  git branch 
 
-`-a` 查看本地所有的分支详情,也会列出本地存储的远程追踪分支
-`--contains <提交哈希>` 查询某次提交包含在哪些分支里面，可以包含远程追踪分支，可以配合`git log --all --grep=<提交哈希>`使用
+`-a` 查看本地所有的分支详情,也会列出本地存储的远程追踪分支<br>
+`--contains <提交哈希>` 查询某次提交包含在哪些分支里面，可以包含远程追踪分支，可以配合`git log --all --grep=<提交哈希>`使用<br>
 -  git branch \<branch-name\>
 
 `-d` 删除一个本地分支
@@ -294,9 +294,9 @@ git push origin A分支名:远程B分支名
 
 -  git remote 
 
-`-v `查看本地的主机配置信息，一般一个主机名会有一对`fetch`和`push`地址
-`add <host> <url>` 对该项目的 host 绑定一个远程仓库地址，如果该主机已经绑定，则会失败。
-`set-url <host> <newUrl>` 将 host 对应的远程仓库地址进行修改
+`-v `查看本地的主机配置信息，一般一个主机名会有一对`fetch`和`push`地址<br>
+`add <host> <url>` 对该项目的 host 绑定一个远程仓库地址，如果该主机已经绑定，则会失败。<br>
+`set-url <host> <newUrl>` 将 host 对应的远程仓库地址进行修改<br>
 
 ## 5.7 标签操作
 
@@ -304,17 +304,17 @@ git push origin A分支名:远程B分支名
 
 -  git tag 
 
-`<tagName> [hashValue] `给当前分支打上一个 tag。如果附加提交哈希，那么就是为指定提交打上一个标签
-`show [tagName]` 展示指定标签的详细信息。如果单独使用`git show`则展示最新一次提交的详细信息。
-`-a <tagName> [hashValue] -m <附加消息>` 为当前分支打上一个附加消息的标签，称为附加标签。如果附加提交哈希，那么就是为指定提交打上一个附加标签
-`[-l <通配规则>]` 不加参数限制会显示所有的标签，可通过`-l` 参数使用glob通配符进行匹配查询
-`-d <tagName>`  删除本地指定标签
+`<tagName> [hashValue] `给当前分支打上一个 tag。如果附加提交哈希，那么就是为指定提交打上一个标签<br>
+`show [tagName]` 展示指定标签的详细信息。如果单独使用`git show`则展示最新一次提交的详细信息。<br>
+`-a <tagName> [hashValue] -m <附加消息>` 为当前分支打上一个附加消息的标签，称为附加标签。如果附加提交哈希，那么就是为指定提交打上一个附加标签<br>
+`[-l <通配规则>]` 不加参数限制会显示所有的标签，可通过`-l` 参数使用glob通配符进行匹配查询<br>
+`-d <tagName>`  删除本地指定标签<br>
 
 -  git push 
 
-`<host> <tagName>` 因为 push 代码不会同时将 tag 提交上去，所以需要额外将某个标签推送到远程仓库。
-`<host> --tags`  将所有 tag 推送到远程仓库
-`<host> --delete <tagName>` 将指定的标签从远程仓库进行删除，也可以使用
+`<host> <tagName>` 因为 push 代码不会同时将 tag 提交上去，所以需要额外将某个标签推送到远程仓库。<br>
+`<host> --tags`  将所有 tag 推送到远程仓库<br>
+`<host> --delete <tagName>` 将指定的标签从远程仓库进行删除，也可以使用<br>
 
 -  git checkout 
 
