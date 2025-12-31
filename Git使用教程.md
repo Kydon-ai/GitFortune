@@ -6,13 +6,8 @@
 
 Git 是一款分布式的、可供多人开发的版本控制软件，在多人项目开发当中用于控制项目版本，方便执行该场景下的提交、合并、回退等操作。如果你不会使用 Git，那么你的成员将无法合并你的工作，这对于团队来说是灾难性的。所以新手入门，不管前后端，都应该从 Git 开始了解如何使用 Git！
 
-## 1.2 如何学习本教程及文档中心其他教程
 
-文档中心存在的初衷就是为了后来的学弟学妹可以快速掌握一些基础的知识而搭建的，你们可以在连接好项目组宽带，或者 WIFI 来访问[603 文档中心]()，从这里面访问其它文档资源。
-
-找到文档后可以根据文档指示搭建好对应环境，复制里面的代码或指令自己动手实践，对工具的原理有一定了解并且熟悉常用指令之后就可以熟练运用该工具。所以你们了解工具文档介绍的原理和基础指令即可进入开发。
-
-## 1.3 学习与实践 Git 的方式
+## 1.2 学习与实践 Git 的方式
 
 在项目中主流的使用 Git 的方式有两种：使用 IDE 的可视化提交按钮和终端指令执行。个人建议是使用终端指令执行 git 操作，这样你可以让自己对 git 的理解更加深刻
 
@@ -45,7 +40,7 @@ Git 是一款分布式的、可供多人开发的版本控制软件，在多人�
 
 **Untracked**: 未跟踪, 此文件在文件夹中, 但并没有加入到 git 库, 不参与版本控制. 通过 git add 状态变为 Staged.
 
-**Unmodify**: 文件已经入库, 未修改, 即版本库中的文件[快照](https://so.csdn.net/so/search?q=快照&spm=1001.2101.3001.7020)内容与文件夹中完全一致. 这种类型的文件有两种去处, 如果它被修改, 而变为 Modified. 如果使用 git rm 移出版本库, 则成为 Untracked 文件
+**Unmodify**: 文件已经入库, 未修改, 即版本库中的文件快照内容与文件夹中完全一致. 这种类型的文件有两种去处, 如果它被修改, 而变为 Modified. 如果使用 git rm 移出版本库, 则成为 Untracked 文件
 
 **Modified**: 文件已修改, 仅仅是修改, 并没有进行其他的操作. 这个文件也有两个去处, 通过 git add 可进入暂存 staged 状态, 使用 git checkout 则丢弃修改过, 返回到 unmodify 状态, 这个 git checkout 即从库中取出文件, 覆盖当前修改
 
@@ -76,11 +71,11 @@ git remote set-url origin https:www.github.com/xxx.git
 git add .
 // 将当前分支复制一份当做xxx分支，并切换过去
 git checkout -b xxx
-// 跳过ESLint校验提交代码
+// 跳过ESLint校验提交代码（一般配置好了.husky不需要跳过，会自动处理好）
 git commit --no-verify -m "xxx"
 // 将A分支推送到远程仓库的B分支，并且建立联系
 git push -u origin A:B
-// 强制回退分支到指定hash码
+// 强制回退分支到指定hash码(可通过git reflog的hash进行回退，但git log已经无法查看指针之后的位置)
 git reset --hard 012789abcd012789abcd012789abcd012789abcd
 // 查看本地所有tag
 git tag
@@ -95,7 +90,7 @@ git tag
 首先必须添加个人信息
 
 ```
-git config --global user.name "Liu Qidong"
+git config --global user.name "kydon"
 git config --global user.email "254****216@qq.com"
 ```
 
@@ -121,7 +116,7 @@ git push -u origin xx分支名
 // 012789abcd012789abcd012789abcd012789abcd
 git log
 git reset --hard 012789abcd012789abcd012789abcd012789abcd
-// 这样所有记录将回到这个节点，但是回退中间的提交都会丢失
+// 这样所有记录将回到这个节点，但是回退中间的提交都会丢失(只能通过git reflog查找之前的hash进行回退)
 // 只想看看可以使用
 git checkout 012789abcd012789abcd012789abcd012789abcd
 ```
@@ -147,6 +142,11 @@ git push origin A分支名:远程B分支名
 此外，可以随便跟一个 name，代表在当前目录创建一个 name 文件夹，再执行`git init`
 
 -  git clone \<url\>
+
+-b branch_name 指定远程分支克隆
+--depth n 只获取最新的n次提交记录,一般填写为1（Shallow Clone）
+--recurse-submodules 通过.gitmodules文件一次性将子模块下载
+--filter=blob:none 按需加载git数据流
 
 当你想获取别人的代码到本地时，可以使用此指令
 
@@ -204,7 +204,7 @@ git push origin A分支名:远程B分支名
 
 -  git pull origin \<remoteBranch\>:\<localBranch\>
 
-相当于执行了`git pull `外加`git merge`,当远程和本地同名时，可以缩写为`git pull origin remoteBranch`
+相当于执行了`git fetch `外加`git merge`,当远程和本地同名时，可以缩写为`git pull origin remoteBranch`
 
 -  git push -u origin \<branchName\>
 
@@ -388,9 +388,26 @@ git push origin A分支名:远程B分支名
 >
 > 中英文冒号都行，建议中文，因为更宽更好看，后面打文字不用再切输入法。
 
+# 七、Git LFS
+为了将大型资源和文本资源解绑，Github和GitLab的发明者专门提出了Git LFS来针对Git 在处理大文件时的性能瓶颈问题，其专门使用服务器来存储大型资源，支持断点续传，加快了git的操作速度。现在git lfs能够无痛切换，上传到github的图片，升级到lfs依旧可原路径访问。
+* git lfs install
+在本机的git上安装lfs，系统级别只需要全局安装一次，当然可以每个仓库都执行一遍
+* git lfs version
+输出lfs的版本信息，未安装则会报错
+* git lfs track "*.psd"
+指定追踪的大文件类型，或者采用.gitattributes进行声明。后续会对识别到的大文件类型，自动替换为存储一个指针，在push的时候，真实的资源会被上传到默认的lfs服务器。如果不指定类型，则会输出已添加的大文件识别类型
+* git lfs untrack "*.psd"
+上述操作的反向操作
+* git lfs ls-files
+查看工作区的所有lfs文件
+* git lfs status
+查看当前变更的lfs文件
 
+# 八、参考链接
 
-# 七、参考链接
+[置顶]-[Pro Git](https://bingohuang.gitbooks.io/progit2/content/)
+
+[置顶]-[Git 中文官网文档](https://git-scm.com/about)
 
 1.[图解 Git | 菜鸟教程 (runoob.com)](https://www.runoob.com/w3cnote/git-graphical.html)
 
@@ -411,3 +428,5 @@ git push origin A分支名:远程B分支名
 9.[Git：Rebase和Merge之间的区别，看完这篇文章你就懂了！-CSDN博客](https://blog.csdn.net/xishining/article/details/115152823)
 
 10.[git 代码提交规范，feat，fix，chore都是什么意思?_git chore-CSDN博客](https://blog.csdn.net/chenyajundd/article/details/139322838)
+
+
